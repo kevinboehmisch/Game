@@ -1,0 +1,188 @@
+/*Erstellen des Spielfelds*/
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;  /* passt automatisch an Seitenverhältnis von Browserfenster an */
+}
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /*Hintergrundfarbe für den gesamten Bildschirm */
+}
+
+#game{
+	width: 1400px;
+	height: 700px;
+	border: 1px solid black;
+	z-index: 1;
+	overflow: hidden; /* Hier wird der Überlauf ausgeblendet */
+}
+
+/*Erstellen des Hintergrundes*/
+#sky{
+	width: 1400px;
+	height: 400px;
+	background-image: url('images/himmel3.png'); 
+	background-repeat: repeat-x;
+  	background-size: cover;
+	position: absolute;
+	top: 40%;
+	transform: translateY(-50%);
+	animation: skyMove 60s linear infinite;
+}
+#ground {
+    	width: 1200px;
+	height: 400px;
+	background-image: url('images/gras2.png'); 
+	background-repeat: repeat-x;
+  	background-size: cover;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
+@keyframes skyMove {
+    	0% {
+        	background-position:  2950px 0;
+    	}
+    	100% {
+        	background-position: -1200px 0;
+    	}
+}
+
+/*Erstellen des Charakters*/
+#character{
+	width: 80px;
+	height: 80px;
+	background-image: url('images/stand.png'); 
+  	background-size: cover;
+	position: relative;
+	top: 400px;
+	left: 660px;
+	opacity: 0; /* Setze die Anfangsopazität auf 0, um den Charakter unsichtbar zu machen */
+    	transition: opacity 0.1s ease-in-out; 
+}
+
+.animateCharacter{
+	animation: jump 550ms;
+}
+@keyframes jump{
+	0%{top:${originalCharacterTop}px;}
+	1%{
+		background-image: url('images/jump.png');
+	} 
+	30%{
+		top:${originalCharacterTop - 100}px; /*es wird immer top verwendet, da das der Gebrauch in CSS ist. */
+		background-image: url('images/jump.png');
+	} 
+	70%{
+		top:${originalCharacterTop - 100}px; /* der Pixelwert sinkt beim springen, da der Abstand zur Decke geringer wird beim Spring*/
+		background-image: url('images/jump.png');
+	}
+	99%{
+		background-image: url('images/jump.png');
+	} 
+	100%{top:${originalCharacterTop}px;}
+}
+
+.animateCharacterWalk{
+	animation: walk 300ms infinite; /*extrem wichtig zu wissen, wenn man kontinuierliche Animationen haben will, solange eine Taste gedrückt wird! */
+}
+@keyframes walk{
+	0%{
+		background-image: url('images/walk.png');
+	} 
+	49%{
+		background-image: url('images/walk.png');
+	} 
+	50%{
+		background-image: url('images/stand.png');
+	} 
+	100%{
+		background-image: url('images/stand.png');
+	}
+}
+
+/* flip um Bild horizontal zu spiegeln, wenn pfeiltaste links oder rechts gedrückt wird */
+.flip {
+  transform: scaleX(-1); /*hiermit wird horizontal geflipped */
+}
+
+
+/*Erstellen der Objekte im Spiel*/
+#ei{
+	width: 90px;
+	height: 90px;
+	background-image: url('images/egg33.png');
+	background-size: cover;
+	z-index: -1;
+	position: relative;
+	top: 292px;
+	left: 656px;
+	animation: shaking 1600ms infinite;
+}
+
+.animateEi{
+	animation: shaking 2000ms infinite;
+}
+@keyframes shaking{
+	0%{
+		background-image: url('images/egg33.png');
+	}
+	20%{
+		background-image: url('images/egg3.png');
+	} 
+	40%{
+		background-image: url('images/egg33.png');
+	} 
+	60%{
+		background-image: url('images/egg4.png');
+	}
+	70%{
+		background-image: url('images/egg5.png');
+	}
+	80%{
+		background-image: url('images/egg4.png');
+	}
+	90%{
+		background-image: url('images/egg5.png');
+	}  
+	100%{
+		background-image: url('images/egg33.png');
+	}
+}
+
+#block{
+	width: 20px;
+	height: 20px;
+	background-color: green;
+	position: relative;
+	top: 380px;
+	left: 1250px;
+}
+
+#schule{
+	width: 220px;
+	height: 220px;
+	background-image: url('images/schule.png');
+	background-size: cover;
+	z-index: 3;
+	position: relative;
+	top: 71px;
+	left: 1800px;
+}
+#buero{
+	width: 160px;
+	height: 160px;
+	background-image: url('images/schulerpc2.png');
+	background-size: cover;
+	position: relative;
+	top: -26px;
+	left: 2600px;
+}
+
+
+	
+	
